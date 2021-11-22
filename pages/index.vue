@@ -16,6 +16,7 @@
             transform="translate(-56 -36.85319)"
             fill="#f2f2f2"
           />
+          <!-- f2f2f2 -->
           <polygon
             points="719.6 507.394 818 409.294 719.6 311.194 749.6 281.294 878 409.294 749.6 537.294 719.6 507.394 719.6 507.394"
             opacity="0.1"
@@ -257,23 +258,14 @@
         </svg>
       </div>
     </div>
-     <!-- adasd {{counter}} 
-     <button class="bg-blue-100" @click="increment"> bnt</button>
-     <button class="bg-red-100" @click="decrement"> bnt</button> -->
+ 
     <div class="container mx-auto | px-4 | md:flex justify-center">
       <search />
     </div>
     <div class="container mx-auto | px-4 | flex justify-center">
       <list />
-      <!-- <input type="text" v-model="test"/> 
-      <button @click="grabar">Save</button>
-      <div v-for="(item,key) in listArray" :key="key">
-        {{item.name}} -->
-      </div>
-    </div>
-
+      </div> 
   </div>
-  <!-- <Tutorial/> -->
 </template>
 
 <script lang="ts">
@@ -281,18 +273,28 @@ import Vue from "vue";
 import Darkmode from "~/components/Darkmode.vue";
 import List from "~/components/List.vue";
 import Search from "~/components/Search.vue";
-import { mapState, mapActions,mapGetters } from 'vuex'
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default Vue.extend({
-  data(){
-
-      const listArray:  Object[] = [];
+  data() {
+    // const listArray:  Object[] = [];
+    const test: boolean = false;
     // const test :String= "";
-     return {listArray} 
+    return { test };
   },
   layout: "home",
   components: { Search, List, Darkmode },
   computed: {
+    changeTest: {
+      set(value: boolean): void {
+        console.log("change");
+        this.test = value;
+      },
+      get(): boolean {
+        return this.test;
+      },
+      // return this.test;
+    },
     // ...mapState(['counter','test']),
     // ...mapGetters(['getCounter'])
   },

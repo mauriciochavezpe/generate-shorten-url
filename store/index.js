@@ -1,7 +1,8 @@
 //path : 0
 export const state = () => ({
   counter: 10,
-  lsUrlShort: []
+  lsUrlShort: [],
+  darkMode: false,
 });
 
 // path : 1
@@ -9,6 +10,7 @@ export const actions = {
   increment: ({ commit }) => commit("increment"),
   decrement: ({ commit }) => commit("decrement"),
   addShortUrl: ({ commit }, url) => commit("addShortUrl", url),
+  changeMode: ({ commit }) => commit("changeMode"),
 
 };
 //path : 2
@@ -24,11 +26,15 @@ export const mutations = {
   },
   addShortUrl(state, url) {
     state.lsUrlShort.push(url);
-  }
+  },
+  changeMode(state) {
+    state.darkMode = !state.darkMode;
+  },
 };
 
 export const getters = {
 
   getCounter: state => state.counter,
-  getlsUrlShort: state => state.lsUrlShort
+  getlsUrlShort: state => state.lsUrlShort,
+  getDarkMode: state => state.darkMode,
 };

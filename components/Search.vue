@@ -12,6 +12,7 @@
           w-screen
           |
           rounded-l-lg
+          relative
         "
         placeholder="www.google.com"
         type="text"
@@ -58,12 +59,27 @@
         </div>
         shorten
       </button>
-      <span class="absolute mt-14 p-2 bg-red-600 w-4/5 rounded-b-lg text-white">
-        <p class="text-xs">
-          El texto ingresado no coincide con una cadena url <br />Por favor
-          intente con otra.
-        </p>
-      </span>
+      <transition name="fade">
+        <span
+          v-show="!isValid"
+          class="
+            absolute
+            mt-14
+            p-2
+            bg-red-600
+            w-4/5
+            rounded-b-lg
+            transition
+            ease-out
+            duration-700
+          "
+        >
+          <p class="text-xs text-white">
+            El texto ingresado no coincide con una cadena url <br />Por favor
+            intente con otra.
+          </p>
+        </span>
+      </transition>
     </div>
   </div>
   <!-- </div> -->
@@ -71,12 +87,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 // usar TypeScript aqui
 function validateUrl(url: string) {
   var regex = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
+    "^(http|https?:\\/\\/)?" + // protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
       "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
       "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
@@ -96,28 +112,38 @@ export default Vue.extend({
     const message: string = "This is a message";
     const sUrl: string = "";
     const bValidUrl: boolean = false;
-
+    const isValid: boolean = true;
     return {
       message,
       sUrl,
       bValidUrl,
+      isValid,
     };
   },
   methods: {
     ...mapActions(["addShortUrl"]),
     invokeValidate(): void {
-      
       if (validateUrl(this.sUrl)) {
-       this.addShortUrl(this.sUrl);
+        this.addShortUrl(this.sUrl);
         this.bValidUrl = true;
+        this.isValid = true;
       } else {
         console.log("no es valido");
-        
+
         this.bValidUrl = false;
+        this.isValid = false;
       }
     },
   },
 });
 </script>
 
-<style></style>
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>

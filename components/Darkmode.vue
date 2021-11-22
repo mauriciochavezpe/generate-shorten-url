@@ -7,9 +7,9 @@
             class="w-full h-full"
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
-            fill="none"
+            :fill="getDarkMode ? 'none' : 'white'"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            :stroke="getDarkMode ? 'black' : 'white'"
           >
             <path
               strokeLinecap="round"
@@ -20,7 +20,7 @@
           </svg>
         </div>
         <label class="switch mx-2">
-          <input type="checkbox" checked />
+          <input type="checkbox" v-model="flagMode" />
           <span class="slider round"></span>
         </label>
         <div class="w-9 h-9">
@@ -28,9 +28,9 @@
             class="w-full h-full"
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
-            fill="none"
+            :fill="getDarkMode ? 'none' : 'white'"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            :stroke="getDarkMode ? 'black' : 'white'"
           >
             <path
               strokeLinecap="round"
@@ -41,20 +41,35 @@
           </svg>
         </div>
       </div>
- 
     </div>
-  </div> 
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { mapGetters, mapActions } from "vuex";
+
 export default Vue.extend({
   data() {
-    const message: string = "This is a message";
-
-    return {
-      message,
-    };
+    return {};
+  },
+  computed: {
+    ...mapGetters(["getDarkMode"]),
+    flagMode: {
+      get(): boolean {
+        return this.getDarkMode;
+      },
+      set(v: boolean): void {
+        this.changeMode(v);
+      },
+    },
+  },
+  methods: {
+    check() {
+      console.log(":) ", this.flagMode);
+      this.flagMode = !this.flagMode;
+    },
+    ...mapActions(["changeMode"]),
   },
 });
 </script>
