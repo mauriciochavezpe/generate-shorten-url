@@ -124,7 +124,8 @@ export default Vue.extend({
     ...mapActions(["addShortUrl"]),
     invokeValidate(): void {
       if (validateUrl(this.sUrl)) {
-        this.addShortUrl(this.sUrl);
+        let path = new Date().getTime();
+        this.addShortUrl({url: this.sUrl,path});
         this.bValidUrl = true;
         this.isValid = true;
       } else {

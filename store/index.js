@@ -9,13 +9,13 @@ export const state = () => ({
 export const actions = {
   increment: ({ commit }) => commit("increment"),
   decrement: ({ commit }) => commit("decrement"),
-  addShortUrl: ({ commit }, url) => commit("addShortUrl", url),
+  addShortUrl: ({ commit }, obj) => commit("addShortUrl", obj),
   changeMode: ({ commit }) => commit("changeMode"),
 
 };
 //path : 2
 export const mutations = {
- 
+
   increment(state) {
     state.counter++;
   },
@@ -24,8 +24,8 @@ export const mutations = {
     state.counter--;
    }
   },
-  addShortUrl(state, url) {
-    state.lsUrlShort.push(url);
+  addShortUrl(state, obj) {
+    state.lsUrlShort.push(obj);
   },
   changeMode(state) {
     state.darkMode = !state.darkMode;

@@ -34,13 +34,14 @@
               overflow-hidden
             "
           >
-            <p>{{ item }}</p>
+            <p>{{ item.url }}</p>
           </div>
           <!-- <span class="my-1"></span> -->
           <div class="flex mt-3 text-sm">
             <!-- <span class=""> -->
             <a
-              :href="item"
+              :href="item.url"
+              target="_blank"
               class="
                 font-medium
                 text-indigo-600
@@ -49,7 +50,7 @@
                 ease-in-out
                 duration-150
               "
-              >{{ item }} &rarr;</a
+              >{{ item.path }} &rarr;</a
             >
             <!-- </span> -->
           </div>
@@ -69,8 +70,6 @@ export default Vue.extend({
   name: "List",
   data() {
     const message: string = "This is a message";
-    // const list: string[] = Array(4).fill("https://www.google.com/");
-    // console.log(list);
 
     return {
       message,
